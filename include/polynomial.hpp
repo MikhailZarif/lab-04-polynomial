@@ -157,8 +157,9 @@ class Polynom {
           newdeg--;
           min--;
           i--;
-        } else
+        } else {
           break;
+        }
       }
     }
     T* res;
