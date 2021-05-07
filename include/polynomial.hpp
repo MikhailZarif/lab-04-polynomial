@@ -317,8 +317,6 @@ class Polynom {
         copyofb[i] = b[i];
       }
       Polynom<T> bcp(b.Degree() + 1, copyofb);
-      delete[] copyofa;
-      delete[] copyofb;
       if (Degree() < b.Degree()) {
         delete[] data;
         deg = 1;
@@ -342,13 +340,15 @@ class Polynom {
           acp -= m;
           delete[] min;
         }
-        //delete[] data;
+        delete[] data;
         deg = Degree() - b.Degree() + 1;
         data = new double[deg];
         for (size_t i = 0; i < deg; i++) {
           data[i] = res[i];
         }
         delete[] res;
+        delete[] copyofa;
+        delete[] copyofb;
         return *this;
       }
     }
@@ -552,14 +552,15 @@ Polynom<double> operator/(const Polynom<T>& a, const Polynom<T>& b) {
     Polynom<double> bcp(b.Degree() + 1, copyofb);
     delete[] copyofa;
     delete[] copyofb;
-    double* res;
     if (a.Degree() < b.Degree()) {
-      res = new double[1];
-      res[0] = 0;
-      Polynom<double> result(1, res);
-      delete[] res;
+      double* r;
+      r = new double[1];
+      r[0] = 0;
+      Polynom<double> result(1, r);
+      delete[] r;
       return result;
     } else {
+      double* res;
       res = new double[a.Degree() - b.Degree() + 1];
       while (acp.Degree() >= bcp.Degree()) {
         size_t delimoe = acp.Degree();
