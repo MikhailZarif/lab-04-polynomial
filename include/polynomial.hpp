@@ -135,13 +135,14 @@ class Polynom {
   [[nodiscard]] size_t Degree() const {
     size_t degree = 0;
     if (data != nullptr) {
-      size_t i = deg - 1;
-      while ((i >= 0) && (i <= deg - 1)) {
+      for (size_t i = deg - 1; i >= 0; i--) {
         if (data[i] != 0) {
           degree = i;
           break;
         }
-        i--;
+        if (i == 0) {
+          break;
+        }
       }
     }
     return degree;
@@ -560,7 +561,7 @@ Polynom<double> operator/(const Polynom<T>& a, const Polynom<T>& b) {
       r = new double[1];
       r[0] = 0;
       Polynom<double> result(1, r);
-      //delete[] r;
+      delete[] r;
       return result;
     } else {
       double* res;
@@ -576,10 +577,10 @@ Polynom<double> operator/(const Polynom<T>& a, const Polynom<T>& b) {
         min[delimoe - delitel] = res[delimoe - delitel];
         Polynom<double> m(delimoe - delitel + 1, min);
         acp = acp - m * bcp;
-        //delete[] min;
+        delete[] min;
       }
       Polynom<double> result(a.Degree() - b.Degree() + 1, res);
-      //delete[] res;
+      delete[] res;
       return result;
     }
   }
@@ -593,7 +594,7 @@ Polynom<double> operator%(const Polynom<double>& a, const Polynom<double>& b) {
       r[i] = a[i];
     }
     Polynom<double> res(a.Degree() + 1, r);
-    // delete[] r;
+    delete[] r;
     return res;
   } else {
     Polynom<double> ch = a / b;
