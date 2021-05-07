@@ -34,17 +34,25 @@ class Polynom {
   //Пользовательский конструктор, где d - это количество слагаемых
   Polynom(const size_t d, const T* k) {
     deg = d;
-    for (size_t i = d - 1; i <= 0; i++) {
-      while (k[i] == 0) {
-        deg--;
+    if (k != nullptr) {
+      for (size_t i = d - 1; i >= 0; i--) {
+        if (k[i] == 0) {
+          deg--;
+        } else {
+          break;
+        }
       }
-    }
-    if (deg != 0) {
-      data = new T[deg];
-      for (size_t i = 0; i < deg; i++) {
-        data[i] = k[i];
+      if (deg != 0) {
+        data = new T[deg];
+        for (size_t i = 0; i < deg; i++) {
+          data[i] = k[i];
+        }
+      } else {
+        deg = 0;
+        data = nullptr;
       }
     } else {
+      deg = 0;
       data = nullptr;
     }
   }
