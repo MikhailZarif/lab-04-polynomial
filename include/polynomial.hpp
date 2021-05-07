@@ -62,15 +62,17 @@ class Polynom {
 
   //Оператор =
   Polynom& operator=(const Polynom& a) {
-    delete[] data;
-    deg = a.deg;
-    if (deg != 0) {
-      data = new T[a.deg];
-      for (size_t i = 0; i < deg; i++) {
-        data[i] = a.data[i];
+    if (&a != this) {
+      delete[] data;
+      deg = a.deg;
+      if (deg != 0) {
+        data = new T[a.deg];
+        for (size_t i = 0; i < deg; i++) {
+          data[i] = a.data[i];
+        }
+      } else {
+        data = nullptr;
       }
-    } else {
-      data = nullptr;
     }
     return *this;
   }
