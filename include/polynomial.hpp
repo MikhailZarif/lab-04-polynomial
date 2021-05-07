@@ -33,8 +33,18 @@ class Polynom {
 
   //Пользовательский конструктор, где d - это количество слагаемых
   Polynom(const size_t d, const T* k) {
-    deg = d;
-    if (k != nullptr) {
+    // deg = d;
+    if ((k == nullptr) || (d == 0)) {
+      deg = 0;
+      data = nullptr;
+    } else {
+      deg = d;
+      data = new T[deg];
+      for (size_t i = 0; i < deg; i++) {
+        data[i] = k[i];
+      }
+    }
+    /*if (k != nullptr) {
       for (size_t i = d - 1; i >= 0; i--) {
         if (k[i] == 0) {
           deg--;
@@ -54,7 +64,7 @@ class Polynom {
     } else {
       deg = 0;
       data = nullptr;
-    }
+    }*/
   }
 
   //Деструктор
