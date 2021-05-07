@@ -153,9 +153,12 @@ class Polynom {
     if (Degree() == b.Degree()) {
       size_t i = Degree();
       while ((data[i] + b[i] == 0) && (i >= 0) && (i <= Degree())) {
-        newdeg--;
-        min--;
-        i--;
+        if (i != 0) {
+          newdeg--;
+          min--;
+          i--;
+        } else
+          break;
       }
     }
     T* res;
