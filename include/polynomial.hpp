@@ -342,7 +342,7 @@ class Polynom {
           acp -= m;
           delete[] min;
         }
-        delete[] data;
+        //delete[] data;
         deg = Degree() - b.Degree() + 1;
         data = new double[deg];
         for (size_t i = 0; i < deg; i++) {
