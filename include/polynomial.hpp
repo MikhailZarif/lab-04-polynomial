@@ -577,12 +577,8 @@ Polynom<double> operator/(const Polynom<T>& a, const Polynom<T>& b) {
 //Остаток от деления на полином %
 Polynom<double> operator%(const Polynom<double>& a, const Polynom<double>& b) {
   if ((b.Degree() == 0) && (b[0] == 0)) {
-    auto* r = new double[a.Degree()];
-    for (size_t i = 0; i < a.Degree() + 1; i++) {
-      r[i] = a[i];
-    }
-    Polynom<double> res(a.Degree() + 1, r);
-    delete[] r;
+    Polynom<double> res;
+    res = a;
     return res;
   } else {
     Polynom<double> ch = a / b;
