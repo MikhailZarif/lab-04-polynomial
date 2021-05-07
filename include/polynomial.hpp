@@ -319,7 +319,7 @@ class Polynom {
       for (size_t i = 0; i < b.Degree() + 1; i++) {
         copyofb[i] = b[i];
       }
-      Polynom<T> bcp(b.Degree() + 1, copyofb);
+      Polynom<double> bcp(b.Degree() + 1, copyofb);
       if (Degree() < b.Degree()) {
         delete[] data;
         deg = 1;
