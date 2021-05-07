@@ -166,6 +166,8 @@ class Polynom {
           min--;
           i--;
         } else {
+          newdeg--;
+          min--;
           break;
         }
       }
@@ -218,9 +220,15 @@ class Polynom {
     if (Degree() == b.Degree()) {
       size_t i = Degree();
       while ((data[i] - b[i] == 0) && (i >= 0) && (i <= Degree())) {
-        newdeg--;
-        min--;
-        i--;
+        if (i != 0) {
+          newdeg--;
+          min--;
+          i--;
+        } else {
+          newdeg--;
+          min--;
+          break;
+        }
       }
     }
     T* res;
@@ -407,9 +415,15 @@ Polynom<T> operator+(const Polynom<T>& a, const Polynom<T>& b) {
   if (a.Degree() == b.Degree()) {
     size_t i = a.Degree();
     while ((a[i] + b[i] == 0) && (i >= 0) && (i <= a.Degree())) {
-      newdeg--;
-      min--;
-      i--;
+      if (i != 0) {
+        newdeg--;
+        min--;
+        i--;
+      } else {
+        newdeg--;
+        min--;
+        break;
+      }
     }
   }
   T* res;
@@ -452,9 +466,15 @@ Polynom<T> operator-(const Polynom<T>& a, const Polynom<T>& b) {
   if (a.Degree() == b.Degree()) {
     size_t i = a.Degree();
     while ((a[i] - b[i] == 0) && (i >= 0) && (i <= a.Degree())) {
-      newdeg--;
-      min--;
-      i--;
+      if (i != 0) {
+        newdeg--;
+        min--;
+        i--;
+      } else {
+        newdeg--;
+        min--;
+        break;
+      }
     }
   }
   T* res;
