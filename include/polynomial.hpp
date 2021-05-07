@@ -328,19 +328,19 @@ class Polynom {
       } else {
         double* res;
         res = new double[Degree() - b.Degree() + 1];
+        double* min;
+        min = new double[acp.Degree() - bcp.Degree() + 1];
         while (acp.Degree() >= bcp.Degree()) {
           size_t delimoe = acp.Degree();
           size_t delitel = bcp.Degree();
           res[delimoe - delitel] = acp[acp.Degree()] / bcp[bcp.Degree()];
-          auto* min = new double[delimoe - delitel + 1];
-          for (size_t i = 0; i < delimoe - delitel + 1; i++) {
+          for (size_t i = 0; i < acp.Degree() - bcp.Degree() + 1; i++) {
             min[i] = 0;
           }
           min[delimoe - delitel] = res[delimoe - delitel];
           Polynom<double> m(delimoe - delitel + 1, min);
           m *= bcp;
           acp -= m;
-          delete[] min;
         }
         delete[] data;
         deg = Degree() - b.Degree() + 1;
@@ -351,6 +351,7 @@ class Polynom {
         delete[] res;
         delete[] copyofa;
         delete[] copyofb;
+        delete[] min;
         return *this;
       }
     }
@@ -559,7 +560,7 @@ Polynom<double> operator/(const Polynom<T>& a, const Polynom<T>& b) {
       r = new double[1];
       r[0] = 0;
       Polynom<double> result(1, r);
-      delete[] r;
+      //delete[] r;
       return result;
     } else {
       double* res;
@@ -575,10 +576,10 @@ Polynom<double> operator/(const Polynom<T>& a, const Polynom<T>& b) {
         min[delimoe - delitel] = res[delimoe - delitel];
         Polynom<double> m(delimoe - delitel + 1, min);
         acp = acp - m * bcp;
-        delete[] min;
+        //delete[] min;
       }
       Polynom<double> result(a.Degree() - b.Degree() + 1, res);
-      delete[] res;
+      //delete[] res;
       return result;
     }
   }
@@ -592,7 +593,7 @@ Polynom<double> operator%(const Polynom<double>& a, const Polynom<double>& b) {
       r[i] = a[i];
     }
     Polynom<double> res(a.Degree() + 1, r);
-    delete[] r;
+    // delete[] r;
     return res;
   } else {
     Polynom<double> ch = a / b;
